@@ -24,6 +24,7 @@ import { AnalyticsPanel } from "@/components/analytics/analytics-panel";
 import { GlassCard } from "@/components/ui/glass-card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { personas } from "@/constants/personas";
+import Nav from "@/components/prompt-studio/nav";
 import type { AnalyticsSnapshot, ConversationRun, PersonaId } from "@/types/lumen";
 
 const emptyAnalytics: AnalyticsSnapshot = {
@@ -105,83 +106,16 @@ export function LumenStudio() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-white">
       <div className="mono-video-fallback absolute inset-0 z-0 opacity-90" />
-      <video className="absolute inset-0 z-0 h-full w-full object-cover opacity-[0.26] mix-blend-screen" autoPlay muted loop playsInline aria-hidden="true">
-        <source src="/lumen-atmosphere.webm" type="video/webm" />
-      </video>
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(255,255,255,0.12),transparent_32%),linear-gradient(to_bottom,rgba(0,0,0,0.16),rgba(0,0,0,0.84))]" />
+            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(255,255,255,0.12),transparent_32%),linear-gradient(to_bottom,rgba(0,0,0,0.16),rgba(0,0,0,0.84))]" />
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1760px]">
-        <aside
-          className={[
-            "hidden shrink-0 p-3 transition-[width] duration-300 md:block",
-            sidebarExpanded ? "md:w-72" : "md:w-[92px]",
-          ].join(" ")}
-        >
-          <nav
-            className={[
-              "liquid-glass !sticky top-3 flex h-[calc(100vh-1.5rem)] w-full flex-col rounded-lg transition-all duration-300",
-              sidebarExpanded ? "p-4" : "p-3",
-            ].join(" ")}
-          >
-            <div
-              className={[
-                "mb-6 flex items-center gap-3",
-                sidebarExpanded ? "justify-start" : "justify-center",
-              ].join(" ")}
-            >
-              <button
-                type="button"
-                aria-label={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
-                title={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
-                onClick={() => setSidebarExpanded((value) => !value)}
-                className="liquid-control relative grid h-11 w-11 shrink-0 place-items-center rounded-lg transition hover:scale-[1.03] hover:text-white"
-              >
-                <Sparkles className="h-5 w-5" />
-                <span className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-md bg-zinc-100 text-zinc-950 shadow-[0_8px_18px_rgba(0,0,0,0.34)]">
-                  {sidebarExpanded ? <PanelLeftClose className="h-3 w-3" /> : <PanelLeftOpen className="h-3 w-3" />}
-                </span>
-              </button>
-              <div className={sidebarExpanded ? "min-w-0" : "sr-only"}>
-                <p className="font-medium leading-none">Lumen</p>
-                <p className="mt-1 text-xs text-white/48">Conversation Studio</p>
-              </div>
-            </div>
-            <div className="space-y-1.5">
-              {navItems.map(({ id, label, icon: Icon }) => (
-                <button
-                  key={label}
-                  aria-label={label}
-                  aria-current={activeSection === id ? "page" : undefined}
-                  title={label}
-                  type="button"
-                  onClick={() => navigateToSection(id)}
-                  className={[
-                    "group relative z-10 flex h-11 w-full items-center gap-3 rounded-md text-sm transition duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/20",
-                    sidebarExpanded ? "justify-start px-3" : "justify-center px-0",
-                    activeSection === id ? "liquid-control text-white" : "text-white/56 hover:bg-white/6 hover:text-white",
-                  ].join(" ")}
-                >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  <span className={sidebarExpanded ? "truncate" : "sr-only"}>{label}</span>
-                </button>
-              ))}
-            </div>
-            {sidebarExpanded ? (
-              <div className="mt-auto rounded-lg bg-white/[0.035] p-3">
-                <div className="mb-2 flex items-center gap-2 text-xs text-white/46">
-                  <SquareActivity className="h-3.5 w-3.5" />
-                  Health
-                </div>
-                <p className="text-lg font-medium">{analytics.averageGroundedness || 0}%</p>
-                <p className="mt-1 text-xs leading-5 text-white/45">workspace confidence</p>
-              </div>
-            ) : (
-              <div className="liquid-control mt-auto grid h-11 place-items-center rounded-md" title="Workspace health">
-                <SquareActivity className="h-4 w-4 text-white/54" />
-              </div>
-            )}
-          </nav>
-        </aside>
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-full">
+       <Nav
+  expanded={sidebarExpanded}
+  setExpanded={setSidebarExpanded}
+  activeSection={activeSection}
+  navItems={navItems}
+  navigateToSection={navigateToSection}
+/>
 
         <section className="min-w-0 flex-1 px-4 pb-28 pt-4 sm:px-5 md:pb-6 md:pl-2 lg:p-6">
           <div className="liquid-glass mb-4 flex items-center justify-between rounded-lg p-3 md:hidden">
