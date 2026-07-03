@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: hsl(0 0% 3.5%);
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-source-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
+  min-height: 100vh;
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+button,
+textarea,
+select,
+input {
+  font: inherit;
+}
+
+.liquid-glass {
+  position: relative;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.026)),
+    rgba(255, 255, 255, 0.018);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 14px 42px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px) saturate(130%);
+}
+
+.liquid-glass::before,
+.liquid-glass-strong::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.14));
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.liquid-glass-strong {
+  position: relative;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.088), rgba(255, 255, 255, 0.028) 46%, rgba(255, 255, 255, 0.052)),
+    rgba(9, 9, 9, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 90px rgba(0, 0, 0, 0.46);
+  backdrop-filter: blur(44px) saturate(125%);
+}
+
+.liquid-control {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04)),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 10px 28px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.liquid-control::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.04));
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.mono-video-fallback {
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.08), transparent 22%),
+    radial-gradient(circle at 70% 72%, rgba(255, 255, 255, 0.055), transparent 24%),
+    linear-gradient(135deg, #050505, #0d0d0d 48%, #030303);
+  animation: tonal-shift 16s ease-in-out infinite alternate;
+}
+
+@keyframes tonal-shift {
+  from {
+    transform: scale(1);
+    filter: brightness(0.92);
+  }
+  to {
+    transform: scale(1.04);
+    filter: brightness(1.12);
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }

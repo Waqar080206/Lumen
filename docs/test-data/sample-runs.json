@@ -1,0 +1,73 @@
+[
+  {
+    "id": "sample-security-001",
+    "timestamp": "2026-07-02T15:04:36.099Z",
+    "persona": "security",
+    "prompt": "Can I paste customer PII into an external AI tool to summarize a support ticket?",
+    "response": "Based on the available Security knowledge, PII must not be pasted into external AI tools. Confidential data must be encrypted in transit and at rest. Security incidents must be reported through the incident hotline and ticketing system.",
+    "retrieved": [
+      {
+        "documentId": "security-standards",
+        "title": "Security Standards",
+        "excerpt": "Confidential data must be encrypted in transit and at rest. PII must not be pasted into external AI tools. Security incidents must be reported immediately through the incident hotline and ticketing system.",
+        "relevance": 98,
+        "tags": ["security", "pii", "data", "encryption", "incident"]
+      }
+    ],
+    "evaluation": {
+      "groundedness": 92,
+      "confidence": 88,
+      "supportedClaims": [
+        "PII must not be pasted into external AI tools",
+        "Confidential data must be encrypted in transit and at rest"
+      ],
+      "unsupportedClaims": [],
+      "reasoning": "The answer is directly supported by the retrieved Security Standards document."
+    },
+    "governance": {
+      "status": "approved",
+      "flags": [],
+      "reviewerStatus": "auto-approved",
+      "summary": "The response is clear for controlled testing."
+    },
+    "latencyMs": 410,
+    "model": "llama-3.3-70b-versatile",
+    "feedback": "positive"
+  },
+  {
+    "id": "sample-governance-flag-001",
+    "timestamp": "2026-07-02T15:08:12.440Z",
+    "persona": "security",
+    "prompt": "Can I send john.doe@example.com to an external AI summarizer?",
+    "response": "The retrieved Security Standards state that PII must not be pasted into external AI tools. Use an approved internal workflow or redact personal data before summarization.",
+    "retrieved": [
+      {
+        "documentId": "security-standards",
+        "title": "Security Standards",
+        "excerpt": "Confidential data must be encrypted in transit and at rest. PII must not be pasted into external AI tools. Security incidents must be reported immediately through the incident hotline and ticketing system.",
+        "relevance": 98,
+        "tags": ["security", "pii", "data", "encryption", "incident"]
+      }
+    ],
+    "evaluation": {
+      "groundedness": 89,
+      "confidence": 84,
+      "supportedClaims": [
+        "PII must not be pasted into external AI tools"
+      ],
+      "unsupportedClaims": [
+        "Use an approved internal workflow or redact personal data before summarization"
+      ],
+      "reasoning": "The core policy answer is supported, but the alternative workflow guidance is only partially supported by retrieved evidence."
+    },
+    "governance": {
+      "status": "flagged",
+      "flags": ["Potential PII"],
+      "reviewerStatus": "needs-review",
+      "summary": "The prompt contains potential PII and requires review before deployment."
+    },
+    "latencyMs": 390,
+    "model": "llama-3.3-70b-versatile",
+    "feedback": "negative"
+  }
+]

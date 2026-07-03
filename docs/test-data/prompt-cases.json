@@ -1,0 +1,50 @@
+[
+  {
+    "id": "security-pii-external-ai",
+    "persona": "security",
+    "prompt": "Can I paste customer PII into an external AI tool to summarize a support ticket?",
+    "expectedDocuments": ["security-standards"],
+    "expectedGovernance": "approved",
+    "expectedThemes": ["PII", "external AI", "security policy"]
+  },
+  {
+    "id": "security-vendor-pii-procurement",
+    "persona": "security",
+    "prompt": "Can I expense a new vendor tool that costs $1,200 and includes customer PII?",
+    "expectedDocuments": ["procurement-guide", "expense-policy", "security-standards"],
+    "expectedGovernance": "approved",
+    "expectedThemes": ["vendor review", "finance approval", "PII"]
+  },
+  {
+    "id": "hr-pto-advance-notice",
+    "persona": "hr",
+    "prompt": "How many days in advance should I request PTO?",
+    "expectedDocuments": ["leave-policy"],
+    "expectedGovernance": "approved",
+    "expectedThemes": ["PTO", "five business days", "manager approval"]
+  },
+  {
+    "id": "it-vpn-hotel-wifi",
+    "persona": "it",
+    "prompt": "Do I need VPN when accessing internal tools from hotel Wi-Fi?",
+    "expectedDocuments": ["vpn-policy"],
+    "expectedGovernance": "approved",
+    "expectedThemes": ["VPN", "unmanaged network", "MFA"]
+  },
+  {
+    "id": "governance-email-pii",
+    "persona": "security",
+    "prompt": "Can I send john.doe@example.com to an external AI summarizer?",
+    "expectedDocuments": ["security-standards"],
+    "expectedGovernance": "flagged",
+    "expectedThemes": ["PII", "external AI", "review required"]
+  },
+  {
+    "id": "low-groundedness-unknown-policy",
+    "persona": "support",
+    "prompt": "What is the company's policy for bringing pets to the moon office?",
+    "expectedDocuments": [],
+    "expectedGovernance": "flagged",
+    "expectedThemes": ["unknown policy", "low groundedness"]
+  }
+]
